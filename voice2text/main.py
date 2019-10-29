@@ -5,7 +5,7 @@ from nltk import pos_tag
 
 import re
 
-from .utils import curr_to_symbol, num_dict, title_dict
+from .utils import curr_to_symbol, num_dict, title_dict, rep_dict
 
 def clean_text(text):
     for word, value in num_dict.items():
@@ -38,7 +38,15 @@ def convert_currency(text):
 
 def convert_repetitions(text):
     # converts double C to CC
-    return text
+    tok = text.split()
+    i, l = 0, len(tok)
+    while i<l:
+        if (tok[i] in rep_dict.keys()) and (len(tok[i+1])==1):
+            tok[i+1] = tok[i+1]*rep_dict[tok[i]]
+            tok.pop(i)
+            l -= 1
+        i += 1
+    return ' '.join(tok)
 
 def convert():
     rec = sr.Recognizer()
@@ -55,7 +63,6 @@ def convert():
     except sr.RequestError as e:
         print(f"Could not send the request. Please check your internet connection and try again; {e}")
     
-    print(text)
     text = clean_text(text)
     text = convert_currency(text)
     text = convert_titles(text)

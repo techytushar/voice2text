@@ -27,3 +27,8 @@ title_dict = {
     'senior': 'Sr.',
     'saint': 'St.'
 }
+
+rep_dict = {
+    'double': 2,
+    'triple': 3
+}
