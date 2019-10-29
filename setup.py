@@ -20,8 +20,9 @@ setuptools.setup(name='voice2text',
       ],
       keywords='speech api python voice machine learning deep learning nlp',
       packages=setuptools.find_packages(),
-      python_requires='>=3.6',
       install_requires=[
-          'requests',
-      ]
+          'nltk',
+          'SpeechRecognition'
+      ],
+      python_requires='>=3.6'
 )
